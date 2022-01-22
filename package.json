@@ -1,0 +1,31 @@
+{
+  "name": "discord-spotify-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon dist/index.js",
+    "watch": "tsc -w",
+    "start": "tsc && nodemon dist/index.js",
+    "depoly": "node dist/depoly-commands.js && yarn dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.11.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "@discordjs/voice": "^0.7.5",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.6.0",
+    "dotenv-safe": "^8.2.0",
+    "erela.js": "^2.3.3",
+    "erela.js-spotify": "^1.2.0",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/dotenv-safe": "^8.1.2",
+    "@types/node": "^17.0.10"
+  }
+}
