@@ -49,9 +49,55 @@ async def play(ctx: commands.Context, *query) -> None:
     else:
         # Search for a Youtube video
         track = await lavapy.SoundcloudTrack.search(query[0], player.node)
-     
     await player.play(track)
 
+
+@bot.command()
+async def pause(ctx: commands.Context) -> None:
+    """
+    Pause the current track.
+    """
+    if ctx.voice_client:
+        await ctx.voice_client.pause()
+    else:
+        await ctx.channel.send("Bot is not connected to a voice channel")
+@bot.command()
+async def resume(ctx: commands.Context) -> None:
+    """
+    Resume the current track.
+    """
+    if ctx.voice_client:
+        await ctx.voice_client.resume()
+    else:
+        await ctx.channel.send("Bot is not connected to a voice channel")
+
+@bot.command()
+async def stop(ctx: commands.Context) -> None:
+    """
+    Stop the current track.
+    """
+    if ctx.voice_client:
+        await ctx.voice_client.stop()
+    else:
+        await ctx.channel.send("Bot is not connected to a voice channel")
+@bot.command()
+async def disconnect(ctx: commands.Context) -> None:
+    """
+    Disconnect the bot from the voice channel.
+    """
+    if ctx.voice_client:
+        await ctx.voice_client.disconnect()
+    else:
+        await ctx.channel.send("Bot is not connected to a voice channel")
+@bot.command()
+async def volume(ctx: commands.Context, volume: int) -> None:
+    """
+    Change the volume of the bot.
+    """
+    if ctx.voice_client:
+         ctx.voice_client.volume = volume
+    else:
+        await ctx.channel.send("Bot is not connected to a voice channel")
 
 bot.loop.create_task(initialiseNodes())
 bot.run(os.getenv("token"))
