@@ -39,9 +39,17 @@ async def play(ctx: commands.Context, *query) -> None:
     else:
         # Bot is connected to a voice channel
         player: lavapy.Player = ctx.voice_client
-
+    # Parse URL to see what to play
+    if query[0].startswith("https://www.youtube.com/watch?v="):
+        # Play a Youtube video
+        track = await lavapy.YoutubeTrack.search(query[0], player.node)
+    elif query[0].startswith("https://open.spotify.com/track/"):
+        # Play a Spotify track
+        track = await spotify.SpotifyTrack.search(query[0], player.node)
+    else:
+        # Search for a Youtube video
+        track = await lavapy.SoundcloudTrack.search(query[0], player.node)
      
-    track = await spotify.SpotifyTrack.search(" ".join(query), player.node)
     await player.play(track)
 
 
